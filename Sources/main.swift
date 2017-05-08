@@ -48,8 +48,8 @@ func getImage(request: HTTPRequest, response: HTTPResponse) {
 }
 
 var routes = Routes()
-routes.add(method: .get, uri: "key", handler: getKey)
-routes.add(method: .get, uri: "image", handler: getImage)
+routes.add(method: .get, uri: "v1/key", handler: getKey)
+routes.add(method: .get, uri: "v1/image", handler: getImage)
 
 server.addRoutes(routes)
 
