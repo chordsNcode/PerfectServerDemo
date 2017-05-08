@@ -1,11 +1,11 @@
 # Perfect Server Demo
 
-### Project Requirements
+## Project Requirements
 In order to run this server, you'll need Swift 3 installed on your machine. If you're using a Mac, you already have everything you need. Otherwise [follow Apple's instructions to install Swift](https://swift.org/getting-started/#installing-swift) before continuing.
 
 You'll also need the latest Xcode installed. This is not a hard-fast requirement, but it does allow for easier debugging.
 
-### Setup
+## Setup
 Once you have Swift installed, run the following commands in a terminal
 ```
 $ cd /path/to/where/you/cloned/this/repo
@@ -15,5 +15,37 @@ This will download [Perfect](https://perfect.org) and all its necessary dependen
 
 Finally, select the terminal scheme and run the server. You should see `[INFO] Starting HTTP server  on 0.0.0.0:8080` printed to the console if everything is setup correctly.
 
-### API Spec
-There are 2 existing endpoints
+
+## API Spec v1
+There are 2 existing endpoints:
+
+
+### GET v1/key
+Given the correct username, returns the "authorization key" to be used on subsequent requests.
+
+#### Parameters
+| Parameter | Expected Value |
+| ------------- |:-------------:|
+| username | the user you wish to have logged in |
+
+#### Example Request
+>_GET http://localhost:8080/v1/key?username=matt _
+
+#### Example Response
+```
+{
+"accessKey": "FB919310-6D87-4B49-B37F-222E1693C754"
+}
+```
+
+### GET v1/image
+Returns an image, as Data. This endpoint does require the `Authorization` header -- use the token returned by the `v1/key` endpoint
+
+#### Parameters
+_None._
+
+#### Example Request
+>_GET http://localhost:8080/v1/image _
+
+#### Example Response
+![logo](webroot/perfect.png)
