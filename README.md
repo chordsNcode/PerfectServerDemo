@@ -29,7 +29,7 @@ Given the correct username, returns the "authorization key" to be used on subseq
 | username | the user you wish to have logged in |
 
 #### Example Request
->_GET http://localhost:8080/v1/key?username=matt _
+>GET http://localhost:8080/v1/key?username=matt
 
 #### Example Response
 ```
@@ -45,7 +45,7 @@ Returns an image, as Data. This endpoint does require the `Authorization` header
 _None._
 
 #### Example Request
->_GET http://localhost:8080/v1/image _
+>GET http://localhost:8080/v1/image
 
 #### Example Response
 ![logo](webroot/perfect.png)
