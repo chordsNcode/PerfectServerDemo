@@ -11,7 +11,7 @@ server.documentRoot = "webroot"
 func getKey(request: HTTPRequest, response: HTTPResponse) {
     do {
         guard request.param(name: "username") == "sean" else {
-            response.appendBody(string: "error")
+            response.appendBody(string: "Error: Forbidden")
                     .completed(status: .forbidden)
             return
         }
@@ -20,14 +20,14 @@ func getKey(request: HTTPRequest, response: HTTPResponse) {
                     .setHeader(.contentType, value: "application/json")
                     .completed()
     } catch {
-        response.setBody(string: "Error")
+        response.setBody(string: "500 Error")
                 .completed(status: .internalServerError)
     }
 }
 
 func getImage(request: HTTPRequest, response: HTTPResponse) {
     guard let _ = request.header(.authorization) else {
-        response.setBody(string: "Error")
+        response.setBody(string: "Error: Unauthorized")
                 .completed(status: .unauthorized)
         return
     }
@@ -42,7 +42,7 @@ func getImage(request: HTTPRequest, response: HTTPResponse) {
 
 
     } catch {
-        response.setBody(string: "Error")
+        response.setBody(string: "500 Error")
                 .completed(status: .internalServerError)
     }
 }
