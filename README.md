@@ -20,7 +20,7 @@ Finally, select the terminal scheme and run the server. You should see `[INFO] S
 There are 2 existing endpoints:
 
 
-### GET v1/key
+### POST v1/key
 Given the correct username, returns the "authorization key" to be used on subsequent requests.
 
 #### Parameters
@@ -29,7 +29,12 @@ Given the correct username, returns the "authorization key" to be used on subseq
 | username | the user you wish to have logged in |
 
 #### Example Request
->GET http://localhost:8080/v1/key?username=matt
+>POST http://localhost:8080/v1/key
+```
+{
+   "username": "matt"
+}
+```
 
 #### Example Response
 ```

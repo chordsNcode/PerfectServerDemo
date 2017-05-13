@@ -8,10 +8,12 @@ let server = HTTPServer()
 server.serverPort = 8080
 server.documentRoot = "webroot"
 
-func getKey(request: HTTPRequest, response: HTTPResponse) {
+func postKey(request: HTTPRequest, response: HTTPResponse) {
     do {
-        guard request.param(name: "username") == "sean" else {
-            response.appendBody(string: "Error: Forbidden")
+        guard let body = try JSONSerialization.jsonObject(with: Data(bytes: request.postBodyBytes!), options: .mutableLeaves) as? [String: Any],
+            "sean" == body["username"] as? String else {
+            
+                response.appendBody(string: "Error: Forbidden")
                     .completed(status: .forbidden)
             return
         }
@@ -48,7 +50,7 @@ func getImage(request: HTTPRequest, response: HTTPResponse) {
 }
 
 var routes = Routes()
-routes.add(method: .get, uri: "v1/key", handler: getKey)
+routes.add(method: .post, uri: "v1/key", handler: postKey)
 routes.add(method: .get, uri: "v1/image", handler: getImage)
 
 server.addRoutes(routes)
